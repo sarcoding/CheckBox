@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        .toDoList{
+            font-size: 20px;
+            padding:10px;
+            margin: auto;
+            border:1px solid black;
+            border-radius: 10px;
+            width: 1000px;
+        }
+    
+        .toDoListTable{
+            border-radius: 10px; 
+            border-collapse: collapse;
+            border-radius: 2px;
+        }
+        tr:nth-child(even){
+            background-color: gray;
+        }
+        tr:nth-child(odd){
+            background-color:white;
+        }
+        td{
+            text-align: center;
+            width: 300px;
+        }
+        #rounded {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        input[type='checkbox']{
+            width: 50px;
+            height: 50px;
+        }
+        input[type='text']{
+            width: 250px;
+            height: 50px;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+        input[type='submit']{
+            width: 100px;
+            height: 50px;
+            border-radius: 5px;
+            color:white;
+            background-color: #4681f4;
+            font-size: large;
+            border-color: white;
+        }
+        input[type='submit'].delete_button{
+            background-color: red;
+            color:white;
+            width: 50px;
+            height:50px;
+        }
+        input[type='submit'].delete_button:nth-child(odd){
+            border-color:gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="toDoList">
+        <table id="rounded" class="toDoListTable">
+            <tr style="background-color: rgb(183, 230, 183); height: 70px; font-size: 25px; font-weight: bold;">
+                <td>ID</td>
+                <td>TASK</td>
+                <td>CheckBox</td>
+                <td></td>
+            </tr>
+            {% for data in records%}
+            <tr>
+                <td>{{ data[0] }}</td>
+                <td>{{ data[1] }}</td>
+                {% if data[2] == True %}
+                <td style="border:0px;">
+                    <input id="{{ data[0] }}" type="checkbox" checked onclick="ChangeisDoneStatue({{ data[0] }})">
+                </td>
+                    {% else %}
+                <td style="border:0px;">
+                    <input type="checkbox" onclick="ChangeisDoneStatue({{ data[0] }})">
+                </td>
+                {% endif %}
+                <td>
+                    <form action="/delete/{{ data[0] }}" method="get">
+                        <input type="submit" class="delete_button" value="✖">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            <!-- </table>
+            </div>
+            <table> -->
+            <tr style="background-color: white; height: 120px;">
+                <td>
+                    <form action="/add", method="post">
+                    <input type="text" name="id" class="id" id="id">
+                </td>
+                <td>
+                    <input type="text" name="task" class="task" id="task">
+                </td>
+                <td>
+                        <input type="submit" value="ADD" >
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        function ChangeisDoneStatue(taskId){
+            window.location.href = "/changeIsDoneStatus/"+taskId;
+        }
+    </script>
+</body>
+</html>
