@@ -10,6 +10,7 @@
             font-size: 20px;
             padding:10px;
             margin: auto;
+            margin-top: 50px;
             border:1px solid black;
             border-radius: 10px;
             width: 1000px;
@@ -43,6 +44,7 @@
             height: 50px;
             border-radius: 5px;
             font-size: 20px;
+            text-align: center;
         }
         input[type='submit']{
             width: 100px;
@@ -105,13 +107,23 @@
                     <input type="text" name="task" class="task" id="task">
                 </td>
                 <td>
-                        <input type="submit" value="ADD" >
+                        <input type="submit" id="ADD_UPDATE" value="ADD" >
                     </form>
                 </td>
             </tr>
         </table>
     </div>
     <script>
+        var textBox = document.getElementById("id");
+
+        textBox.addEventListener("input", function() {
+            var addUpdateButton = document.getElementById("ADD_UPDATE");
+            if (textBox.value.trim() !== "") {
+                addUpdateButton.value = "UPDATE";
+            } else {
+                addUpdateButton.value = "ADD";
+            }
+        });
         function ChangeisDoneStatue(taskId){
             window.location.href = "/changeIsDoneStatus/"+taskId;
         }
