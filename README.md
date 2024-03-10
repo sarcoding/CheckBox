@@ -1,4 +1,4 @@
-# Checklist Website Project
+# ToDo List Website Project
 
 This project involves creating a basic checklist website that performs CRUD (Create, Read, Update, Delete) operations on an SQLite database. The website displays tasks sequentially and allows users to interact with them by checking them off or deleting them.
 
